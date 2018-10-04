@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-        width
+        height: 50
     }
 })
 
@@ -41,20 +41,18 @@ export default class extends Component {
 
     render(){
         return(
-            <View>
                 <Swiper
                     autoplay
                     height={240}
                 >
                     {
                         this.state.imagesSlider.map ( (item, key) => 
-                        <Slider 
+                        <Slider
                             uri={item}
                             key={key}/> 
                     )
                     }
                 </Swiper>
-            </View>
         );
     }
 }
