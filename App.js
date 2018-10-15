@@ -1,52 +1,37 @@
-import React from 'react';
-import {Text, View, StyleSheet, Image, ScrollView } from 'react-native';
-import List from './application/components/ListComponent';
-import Slide from './application/components/SliderComponent';
-import Header from './application/components/HeaderComponent';
-import SideMenu from 'react-native-side-menu';
-import Menu from './application/components/MenuComponent';
+import React, {Component} from 'react';
+import {
+    Navigator
+} from 'react-native-deprecated-custom-components';
 
-export default class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isOpen: false
+import MainScreen from './application/screens/MainScreen';
+import Search from './application/components/SearchComponent';
+
+class App extends Component {
+    _renderScene(route, navigator)
+    {
+        var navigator = {navigator}
+
+        switch(route.ident)
+        {
+            case 'MainScreen':
+                return (
+                    <MainScreen />
+                )
+            case 'Search':
+                return (
+                    <Search />
+                )
+        }
     }
-  }
 
-  toggle(){
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  }
-
-  updateMenu(isOpen){
-    this.setState({isOpen});
-  }
-
-  render() {
-    const menu = <Menu />;
-    return (
-      <SideMenu
-        menu={menu}
-        isOpen={this.state.isOpen}
-        onChange={(isOpen) => this.updateMenu(isOpen)}
-      >
-      <ScrollView>
-        <View style={styles.container}>
-            <Header toggle={this.toggle.bind(this)}/>
-            <Slide />
-            <List />
-        </View>
-        </ScrollView>
-      </SideMenu>
-    );
-  }
+    render(){
+        return (
+            <Navigator 
+                initialRoute={{ident: 'Search'}}
+                renderScene={this._renderScene}
+            />
+        )
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'black',
-    flex: 1
-  }
-})
+export default App;
