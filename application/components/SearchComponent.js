@@ -99,8 +99,7 @@ class Search extends Component {
 
     filter(text)
     {
-        const newData = showsFirst.filter( (item) => item.name === text)
-        console.log(newData)
+        const newData = showsFirst.filter( (item) => item.name.toUpperCase().includes(text.toUpperCase()))
         this.setState({
             data : newData,
             text: text
@@ -115,7 +114,7 @@ class Search extends Component {
     _renderItem(item)
     {
         return (
-            <Image key={item.key} source={{uri: item.image}} style={styles.dataImage} />
+            <Image key={item.key} source={{uri: item.item.image}} style={styles.dataImage} />
         );
     }
     render(){
@@ -132,6 +131,8 @@ class Search extends Component {
                         style={styles.input}
                         placeholder="Search"
                         placeholderTextColor="gray"
+                        keyboardAppearance="dark"
+                        autoFocus={true}
                     />
                     {
                         this.state.text ?
@@ -144,7 +145,7 @@ class Search extends Component {
                             :
                             null
                     }
-                    <TouchableWithoutFeedback style={styles.cancelBtn}>
+                    <TouchableWithoutFeedback style={styles.cancelBtn} onPress={() => this.props.navigator.pop()}>
                         <View style={styles.cancelBtnContainer}>
                             <Text style={styles.cancelButtonText}>
                                 Cancel
@@ -155,6 +156,7 @@ class Search extends Component {
                 <ScrollView>
                     <FlatList 
                         style={{marginHorizontal: 5}}
+                        numColumns={3}
                         data={this.state.data}
                         renderItem= {(item) => this._renderItem(item)}
                     />
@@ -217,6 +219,7 @@ const styles = StyleSheet.create({
     },
     dataImage: {
         marginRight: 5,
+        marginTop : 5,
         width: 115,
         height: 170
     }

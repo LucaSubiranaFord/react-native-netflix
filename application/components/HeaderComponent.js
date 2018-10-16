@@ -14,7 +14,10 @@ const Header = props =>  (
         <Image source={require('../images/icnBars.png')} style={{width: 30, height: 30}} />
       </TouchableWithoutFeedback>
         <Image source={require('../images/Netflix-logo.png')} style={styles.logo} />
-        <Image source={require('../images/icnSearch.png')} style={{width: 30, height: 30}} />
+        
+        <TouchableWithoutFeedback onPress={() => props.navigator.push({ident: 'Search'})}>
+          <Image source={require('../images/icnSearch.png')} style={{width: 30, height: 30}} />
+        </TouchableWithoutFeedback>
   </View>
 )
 

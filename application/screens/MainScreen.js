@@ -34,9 +34,9 @@ export default class MainScreen extends React.Component {
       >
       <ScrollView>
         <View style={styles.container}>
-            <Header toggle={this.toggle.bind(this)}/>
+            <Header navigator={this.props.navigator} toggle={this.toggle.bind(this)}/>
             <Slide />
-            <List />
+            <List navigator={this.props.navigator}/>
         </View>
         </ScrollView>
       </SideMenu>

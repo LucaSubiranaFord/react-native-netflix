@@ -5,6 +5,7 @@ import {
 
 import MainScreen from './application/screens/MainScreen';
 import Search from './application/components/SearchComponent';
+import Details from './application/components/DetailsComponent';
 
 class App extends Component {
     _renderScene(route, navigator)
@@ -15,11 +16,15 @@ class App extends Component {
         {
             case 'MainScreen':
                 return (
-                    <MainScreen />
+                    <MainScreen {...navigator}/>
                 )
             case 'Search':
                 return (
-                    <Search />
+                    <Search {...navigator}/>
+                )
+            case 'Details':
+                return (
+                    <Details {...navigator} {...route.passProps}/>
                 )
         }
     }
@@ -27,7 +32,7 @@ class App extends Component {
     render(){
         return (
             <Navigator 
-                initialRoute={{ident: 'Search'}}
+                initialRoute={{ident: 'MainScreen'}}
                 renderScene={this._renderScene}
             />
         )
